@@ -10,3 +10,21 @@ unsubcribe1();
 
 subscribable.subscribe(subscriber2);
 subscribable.publish("Hello Pub Sub Pattern  -> 2!");
+
+
+/** Data class */
+export class DataClass extends Subscribable<number> {
+    constructor(private value: number) {
+        super();
+    }
+    
+    setValue(value: number) {
+        this.value = value;
+        this.publish(value);
+    }
+}
+
+const dc : DataClass = new DataClass(0);
+dc.subscribe((v: number) => console.log(`DC1 `, v));
+dc.subscribe((v: number) => console.log(`DC2 `, v));
+dc.setValue(90010);
